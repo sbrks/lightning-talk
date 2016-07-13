@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>Hello World!</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+		 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+		     <link rel="stylesheet" href="css/normalize.css">
+  			<link rel="stylesheet" href="css/skeleton.css">
+
+   			 <link rel="icon" type="image/png" href="images/favicon.png">
+	</head>
+	<body>
+	<div class="container"><br><br>
+
+	<h1 style="text-align:center">Browser Graphics Lightning Talk:</h1><h2 style="text-align:center"> Canvas, Three.js, and WebGL</h2>
+	<div class="image-container" width="1200px">
+		<img src="gmapcube.png" height="300px" width="310px" style="padding:3px">
+		<img src="nytworldpop.png" height="300px" width="310px" style="padding:3px">
+		<img src="webglwater.png" height="300px" width="310px" style="padding:3px">
+	</div>
+	<hr>
+
+	<h2 style="text-align:center">Hello, 2D World</h2>
+
+	<h3>Canvas</h3>
+
+		<h6><strong><a href="file:///Users/sambrooks/Desktop/wdi29/canvas/index.html">Demo Canvas Drawing App</a></strong></h6>
+
+		<p>Canvas is a simple but powerful HTML element that functions as a container for graphics. You can easily call it in an HTML file using the &lt;canvas&gt; tag. The element is just a container, however. To draw the graphics that display in that canvas, you must write a script.</p>
+
+		<p>To set up, after declaring the canvas element and targeting it in JS, you call the getContext() method on it, which is where most of the real funcationality comes. This method returns an object that in turn provides the methods and properties for drawing on the canvas.</p>
+
+		<p>For my demo drawing app,  I wanted to simulate a simple sketch pad using the cursor as a drawing tool. I focused mostly on Path methods, such as beginPath(), moveTo(), and fill(). Path methods served me well because, quite literally, you are writing a script for the path your mouse is taking and visually rendering that path onto the canvas. Once you have those paths configured, you set event listeners for clicking, mousing down, and moving the mouse.</p>
+
+		<p>For the color swatch and radius buttons, I used Canvas's fillStyle() and strokeStyle() methods. Setting event listeners on the swatch elements, I could call these methods to change the color of the fill and stroke of the path I was drawing.</p>
+
+		<h5>Other cool Canvas examples:</h5>
+		<ul>
+			<li><a href="http://lab.hakim.se/particles/02/">Particles</a></li>
+			<li><a href="http://andrew-hoyer.com/experiments/cloth/">Amazing Cloth Simulator</a></li>
+			<li><a href="http://lab.hakim.se/particles/02/">Particles</a></li>
+		</ul><br>
+
+		<h5>More:</h5>
+
+		<a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">MDN Canvas reference</a><hr>
+
+
+
+
+
+	<h2 style="text-align:center">Hello, 3D World</h2>
+
+	<h3>Three.js</h3>
+
+	<h6><strong><a href="file:///Users/sambrooks/Desktop/wdi29/three/cube-index.html">Demo App: Rotating Geometric Cube</a></strong></h6>
+
+	<p>So Canvas is cool, but I found that its real power could be leveraged with Three.js and WebGL. Three.js is a Javascript library that makes working with 3D in the browser relatively easy. With it, you can create the building blocks of 3D modeling – cameras, meshes, lights, objects and more, and apply animations on them. Three.js requires a renderer element, i.e. a container in which a scene can be drawn. One of those renderers is Canvas. You can also use WebGL, SVG, and CSS3D.</p>
+	<p>Use Three.js to create cameras, objects, lights, materials, and more</p>
+
+
+
+	<h4>Other cool Three.js examples:</h4>
+		<ul>
+			<li><a href="http://threejs.org/examples/#webgl_geometry_extrude_shapes2">Geometric extrusion - could be useful for topographical maps, data visualization</a></li>
+			<li><a href="http://threejs.org/examples/#webgl_animation_cloth/">Another Amazing Cloth Simulator</a></li>
+			<li><a href="http://threejs.org/examples/#webgl_lights_physical">Light Manipulation</a></li>
+		</ul><br>
+
+	<h3>WebGL</h3>
+	<p>WebGL (aka Web Graphics Library) is a Javasript API for rendering interactive 3D and 2D graphics within any compatible web browser without the use of plugins. These graphics are rendered within the &lt;canvas&gt; element. </p>
+
+	<h5>Web GL is great for:</h5>
+	<ul>
+		<li>Games</li>
+		<li>Image Filters</li>
+		<li>Data visualization</li>
+		<li>3D applications</li>
+	</ul>
+
+	<ul>
+		<li><a href="http://www.randelshofer.ch/webgl/rubikscube/">WebGL Rubik's Cube</a></li>
+		<li><a href="http://renaultespace.littleworkshop.fr/">Renault (Three.js + WebGL)</a></li> 
+		<li><a href="http://willbeatsnoise.com/">Gisele Bundchen + UA</a></li>
+		<li><a href="http://data-arts.appspot.com/globe/">World Population Map</a></li>
+		<li><a href="http://www.nytimes.com/interactive/2015/03/19/upshot/3d-yield-curve-economic-growth.html?abt=0002&abg=1&_r=1">NYT Predictive Yield Curve Visualization</a></li>
+</ul>
+<p>Cool visual editor: http://mrdoob.com/projects/htmleditor/</p>
+
+
+<!-- 
+		<script src="js/three.js"></script>
+
+
+		<script>
+			// Our Javascript will go here.
+
+			//setting up the scene, camera, and renderer. the camera we are using is PerspectiveCamera, of which the first attribute is the field of view. the second is the aspect ratio (width of elemenet divided by height). the next two attributes are the near and far clipping plane. this means that objects further away from the camera than the value of far or closer than near won't be rendered. 
+
+			//next is the renderer. this is where the magic happens. here we use webGLrenderer. we have to set the size of this. good idea to use the width and height of the area we want to fill with our app - in this case, the width and height of broswer window.
+			//lastly, add the renderer element to our HTML document. this is a <canvas> element the renderer uses to display the scene to us.
+
+
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			//now let's add the cube
+			var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+			var material = new THREE.MeshBasicMaterial( { color: 0xfffff, wireframe: true } );
+			var cube = new THREE.Mesh( geometry, material );
+
+			//and the sphere
+
+			//sphere vars
+			var radius = 50,
+				segments = 16,
+				rings = 16;
+
+				//create new mesh with sphere geometry
+			var sphere = new THREE.Mesh( 
+				new THREE.SphereGeometry( radius, segments, rings),
+				sphereMaterial);
+
+			//create sphere's material
+			var sphereMaterial = new THREE.MeshLambertMaterial({ color: 0xCC0000 });
+
+
+			// create a point light
+			var pointLight = new THREE.PointLight(0xFFFFFF);
+			//set its position
+			pointLight.position.x = 10;
+			pointLight.position.y = 50;
+			pointLight.position.z = 130;
+
+
+			scene.add( cube );
+			scene.add( sphere );
+			scene.add( pointLight );
+
+			camera.position.z = 3;
+
+		//now, in order to see something, weneed what's called a render loop
+
+			function render() {
+				requestAnimationFrame( render );
+				//animations - these will be run every frame (60x per second) and rotate the cube.
+				cube.rotation.x += 0.05;
+				cube.rotation.y += 0.05;
+				sphere.rotation.x += 0.01;
+				renderer.render( scene, camera );
+			}
+			render();
+
+			//to create a cube, we need BoxGeometry. this is an obejct that contains al the points and fill of the cube.
+			//we alse need the material to color it. Three.js comes with several materials. they take an object of properties which will be applied to them. 
+			//third we need the Mesh - an object that takes a geometry and applies a material to it, which we can then insert into our scene and move frely around
+
+			//when we call scene.add(), the thing we add will be added to the coordinates (0,0,0) by default. this could cause the camera and the cube to be inside each outher. to avoid this, we move the camera out a bit.
+
+
+
+		</script> -->
+
+
+</div>
+	</body>
+</html>

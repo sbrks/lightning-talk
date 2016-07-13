@@ -1,0 +1,68 @@
+
+
+// Our Javascript will go here.
+
+//setting up the scene, camera, and renderer. the camera we are using is PerspectiveCamera, of which the first attribute is the field of view. the second is the aspect ratio (width of elemenet divided by height). the next two attributes are the near and far clipping plane. this means that objects further away from the camera than the value of far or closer than near won't be rendered. 
+
+//next is the renderer. this is where the magic happens. here we use webGLrenderer. we have to set the size of this. good idea to use the width and height of the area we want to fill with our app - in this case, the width and height of broswer window.
+//lastly, add the renderer element to our HTML document. this is a <canvas> element the renderer uses to display the scene to us.
+
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+
+//now let's add the cube
+var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( { color: 0xfffff, wireframe: true } );
+var cube = new THREE.Mesh( geometry, material );
+
+// and the sphere
+
+// sphere vars
+var radius = 50,
+	segments = 16,
+	rings = 16;
+
+	// create new mesh with sphere geometry
+var sphere = new THREE.Mesh( 
+	new THREE.SphereGeometry( radius, segments, rings),
+	sphereMaterial);
+
+// create sphere's material
+var sphereMaterial = new THREE.MeshLambertMaterial({ color: 0xCC0000 });
+
+
+// create a point light
+var pointLight = new THREE.PointLight(0xFFFFFF);
+//set its position
+pointLight.position.x = 10;
+pointLight.position.y = 50;
+pointLight.position.z = 130;
+
+
+scene.add( cube );
+scene.add( sphere );
+scene.add( pointLight );
+
+camera.position.z = 3;
+
+//now, in order to see something, we need what's called a render loop
+
+function render() {
+	requestAnimationFrame( render );
+	//animations - these will be run every frame (60 frames per second) and rotate the cube.
+	cube.rotation.x += 0.05;
+	cube.rotation.y += 0.05;
+	sphere.rotation.x += 0.01;
+	renderer.render( scene, camera );
+}
+render();
+
+//to create a cube, we need BoxGeometry. this is an obejct that contains al the points and fill of the cube.
+//we alse need the material to color it. Three.js comes with several materials. they take an object of properties which will be applied to them. 
+//third we need the Mesh - an object that takes a geometry and applies a material to it, which we can then insert into our scene and move frely around
+
+//when we call scene.add(), the thing we add will be added to the coordinates (0,0,0) by default. this could cause the camera and the cube to be inside each outher. to avoid this, we move the camera out a bit.
